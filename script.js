@@ -18,6 +18,7 @@ const amount = document.getElementById("amount");
 const currency = document.getElementById("currency");
 const footer = document.querySelector("main footer");
 const description = document.getElementById("description");
+const result = document.getElementById("result")
 
 // quero capturar o valor conforme a pessoa digita
 // quero observar a interação do usuário
@@ -55,8 +56,8 @@ amount.addEventListener("input", () => {
 
 form.onsubmit = (event) => {
     event.preventDefault(); // previne o envio do formulário
-// criei um switch para verificar a moeda selecionada
-    switch(currency.value){
+
+    switch(currency.value){ // criei um switch para verificar a moeda selecionada
         case "USD":
             convertCurrency(amount.value, USD, "US$");
             break;
@@ -73,18 +74,16 @@ form.onsubmit = (event) => {
 // a próxima etapa é a conversão do valor
 
 // vamos criar uma função para isso
-function convertCurrency(amount, price, symbol){
+function convertCurrency(amount, price, symbol){ // exibindo a cotação da moeda selecionada
     try {
-        // exibindo a cotação da moeda selecionada
-        description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
-        // usar o show-result para mostrar o resultado no rodapé
-        // esse show result está numa class do CSS
-        footer.classList.add("show-result");
+        description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}` 
+        let total = amount * price // calcula o total
+        total = formatCurrencyBRL(total) 
+        result.textContent = `${total} Reais` // exibe o resultado total
+        footer.classList.add("show-result"); // usar o show-result para mostrar o resultado no rodapé, esse show result está numa class do CSS
     } catch (error) {
         console.log("Erro na conversão:", error);
-
-        // remove o footer da terra se tiver erro
-        footer.classList.remove("show-result");
+        footer.classList.remove("show-result"); // remove o footer da terra se tiver erro
     }
 }
 
