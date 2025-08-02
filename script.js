@@ -76,7 +76,7 @@ form.onsubmit = (event) => {
 function convertCurrency(amount, price, symbol){
     try {
         // exibindo a cotação da moeda selecionada
-        description.textContent = `${symbol} 1 = ${price}`
+        description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
         // usar o show-result para mostrar o resultado no rodapé
         // esse show result está numa class do CSS
         footer.classList.add("show-result");
