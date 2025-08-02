@@ -17,6 +17,7 @@ const form = document.querySelector("form");
 const amount = document.getElementById("amount");
 const currency = document.getElementById("currency");
 const footer = document.querySelector("main footer");
+const description = document.getElementById("description");
 
 // quero capturar o valor conforme a pessoa digita
 // quero observar a interação do usuário
@@ -74,6 +75,8 @@ form.onsubmit = (event) => {
 // vamos criar uma função para isso
 function convertCurrency(amount, price, symbol){
     try {
+        // exibindo a cotação da moeda selecionada
+        description.textContent = `${symbol} 1 = ${price}`
         // usar o show-result para mostrar o resultado no rodapé
         // esse show result está numa class do CSS
         footer.classList.add("show-result");
@@ -83,4 +86,12 @@ function convertCurrency(amount, price, symbol){
         // remove o footer da terra se tiver erro
         footer.classList.remove("show-result");
     }
+}
+
+// formata a moeda em real brasileiro
+function formatCurrencyBRL(value){
+    return Number(value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    })
 }
